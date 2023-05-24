@@ -67,7 +67,7 @@ func BenchmarkSimulation(b *testing.B) {
 	require.NoError(b, err, "simulation setup failed")
 
 	b.Cleanup(func() {
-		db.Close()
+		_ = db.Close()
 		err = os.RemoveAll(dir)
 		require.NoError(b, err)
 	})
