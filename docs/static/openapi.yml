@@ -63,7 +63,7 @@ paths:
                       type: string
                     black:
                       type: string
-                    read:
+                    red:
                       type: string
               pagination:
                 type: object
@@ -190,7 +190,7 @@ paths:
                     type: string
                   black:
                     type: string
-                  read:
+                  red:
                     type: string
         default:
           description: An unexpected error response.
@@ -29725,7 +29725,7 @@ definitions:
               type: string
             black:
               type: string
-            read:
+            red:
               type: string
       pagination:
         type: object
@@ -29766,7 +29766,7 @@ definitions:
             type: string
           black:
             type: string
-          read:
+          red:
             type: string
   alice.checkers.checkers.QueryGetSystemInfoResponse:
     type: object
@@ -29795,7 +29795,7 @@ definitions:
         type: string
       black:
         type: string
-      read:
+      red:
         type: string
   alice.checkers.checkers.SystemInfo:
     type: object

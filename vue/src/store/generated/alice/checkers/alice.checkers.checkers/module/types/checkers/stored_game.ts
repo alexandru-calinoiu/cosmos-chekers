@@ -8,7 +8,7 @@ export interface StoredGame {
   board: string;
   turn: string;
   black: string;
-  read: string;
+  red: string;
 }
 
 const baseStoredGame: object = {
@@ -16,7 +16,7 @@ const baseStoredGame: object = {
   board: "",
   turn: "",
   black: "",
-  read: "",
+  red: "",
 };
 
 export const StoredGame = {
@@ -33,8 +33,8 @@ export const StoredGame = {
     if (message.black !== "") {
       writer.uint32(34).string(message.black);
     }
-    if (message.read !== "") {
-      writer.uint32(42).string(message.read);
+    if (message.red !== "") {
+      writer.uint32(42).string(message.red);
     }
     return writer;
   },
@@ -59,7 +59,7 @@ export const StoredGame = {
           message.black = reader.string();
           break;
         case 5:
-          message.read = reader.string();
+          message.red = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -91,10 +91,10 @@ export const StoredGame = {
     } else {
       message.black = "";
     }
-    if (object.read !== undefined && object.read !== null) {
-      message.read = String(object.read);
+    if (object.red !== undefined && object.red !== null) {
+      message.red = String(object.red);
     } else {
-      message.read = "";
+      message.red = "";
     }
     return message;
   },
@@ -105,7 +105,7 @@ export const StoredGame = {
     message.board !== undefined && (obj.board = message.board);
     message.turn !== undefined && (obj.turn = message.turn);
     message.black !== undefined && (obj.black = message.black);
-    message.read !== undefined && (obj.read = message.read);
+    message.red !== undefined && (obj.red = message.red);
     return obj;
   },
 
@@ -131,10 +131,10 @@ export const StoredGame = {
     } else {
       message.black = "";
     }
-    if (object.read !== undefined && object.read !== null) {
-      message.read = object.read;
+    if (object.red !== undefined && object.red !== null) {
+      message.red = object.red;
     } else {
-      message.read = "";
+      message.red = "";
     }
     return message;
   },

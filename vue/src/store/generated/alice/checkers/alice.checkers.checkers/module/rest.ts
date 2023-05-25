@@ -50,7 +50,7 @@ export interface CheckersStoredGame {
   board?: string;
   turn?: string;
   black?: string;
-  read?: string;
+  red?: string;
 }
 
 export interface CheckersSystemInfo {
