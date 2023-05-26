@@ -1,20 +1,15 @@
 package types_test
 
 import (
+	"github.com/alice/checkers/testutil/sample"
 	"github.com/alice/checkers/x/checkers/rules"
-	"github.com/alice/checkers/x/checkers/testutil"
 	types "github.com/alice/checkers/x/checkers/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 	"testing"
 )
 
-const (
-	alice = testutil.Alice
-	bob   = testutil.Bob
-)
-
-func getStoredGame() *types.StoredGame {
+func getStoredGame(alice, bob string) *types.StoredGame {
 	return &types.StoredGame{
 		Index: "1",
 		Board: rules.New().String(),
@@ -25,15 +20,21 @@ func getStoredGame() *types.StoredGame {
 }
 
 func TestCanGetBlackAddress(t *testing.T) {
+	alice := sample.AccAddress()
+	bob := sample.AccAddress()
+
 	aliceAddress, err := sdk.AccAddressFromBech32(alice)
 	require.NoError(t, err)
-	blackAddress, err := getStoredGame().GetBlackAddress()
+	blackAddress, err := getStoredGame(alice, bob).GetBlackAddress()
 	require.NoError(t, err)
 	require.Equal(t, aliceAddress, blackAddress)
 }
 
 func TestGetWrongBlackAddress(t *testing.T) {
-	storedGame := getStoredGame()
+	alice := sample.AccAddress()
+	bob := sample.AccAddress()
+
+	storedGame := getStoredGame(alice, bob)
 	storedGame.Black = "42"
 	blackAddress, err := storedGame.GetBlackAddress()
 	require.Nil(t, blackAddress)

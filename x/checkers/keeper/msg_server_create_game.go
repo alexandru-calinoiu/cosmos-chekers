@@ -10,6 +10,7 @@ import (
 func (k msgServer) CreateGame(goCtx context.Context, msg *types.MsgCreateGame) (*types.MsgCreateGameResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
+	k.Keeper.GetSystemInfo(ctx)
 	// TODO: Handling the message
 	_ = ctx
 

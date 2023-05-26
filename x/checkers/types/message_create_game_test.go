@@ -9,21 +9,42 @@ import (
 )
 
 func TestMsgCreateGame_ValidateBasic(t *testing.T) {
+	alice := sample.AccAddress()
+	bob := sample.AccAddress()
+	carol := sample.AccAddress()
+
 	tests := []struct {
 		name string
 		msg  MsgCreateGame
 		err  error
 	}{
 		{
-			name: "invalid address",
+			name: "invalid creator address",
 			msg: MsgCreateGame{
 				Creator: "invalid_address",
 			},
 			err: sdkerrors.ErrInvalidAddress,
 		}, {
+			name: "invalid black address",
+			msg: MsgCreateGame{
+				Creator: alice,
+				Black:   "invalid_address",
+			},
+			err: sdkerrors.ErrInvalidAddress,
+		}, {
+			name: "invalid red address",
+			msg: MsgCreateGame{
+				Creator: alice,
+				Black:   bob,
+				Red:     "invalid_address",
+			},
+			err: sdkerrors.ErrInvalidAddress,
+		}, {
 			name: "valid address",
 			msg: MsgCreateGame{
-				Creator: sample.AccAddress(),
+				Creator: alice,
+				Black:   bob,
+				Red:     carol,
 			},
 		},
 	}
