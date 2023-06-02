@@ -13,7 +13,7 @@ import (
 )
 
 func TestGameCreate(t *testing.T) {
-	msgServer, _, ctx := setupMessageServerCreateGame(t)
+	msgServer, _, ctx := SetupMessageServerCreateGame(t)
 	createResponse, err := msgServer.CreateGame(ctx, &types.MsgCreateGame{
 		Creator: sample.AccAddress(),
 		Black:   sample.AccAddress(),
@@ -28,7 +28,7 @@ func TestGameCreate(t *testing.T) {
 func TestGameCreateGameWasSaved(t *testing.T) {
 	black := sample.AccAddress()
 	red := sample.AccAddress()
-	msgServer, k, ctx := setupMessageServerCreateGame(t)
+	msgServer, k, ctx := SetupMessageServerCreateGame(t)
 	_, err := msgServer.CreateGame(ctx, &types.MsgCreateGame{
 		Creator: sample.AccAddress(),
 		Black:   black,
@@ -51,7 +51,7 @@ func TestGameCreateGameWasSaved(t *testing.T) {
 	}, storedGame)
 }
 
-func setupMessageServerCreateGame(t *testing.T) (types.MsgServer, keeper.Keeper, context.Context) {
+func SetupMessageServerCreateGame(t *testing.T) (types.MsgServer, keeper.Keeper, context.Context) {
 	k, ctx := keepertest.CheckersKeeper(t)
 	checkers.InitGenesis(ctx, *k, *types.DefaultGenesis())
 	return keeper.NewMsgServerImpl(*k), *k, sdk.WrapSDKContext(ctx)
